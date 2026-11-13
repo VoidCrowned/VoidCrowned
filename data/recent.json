@@ -1,0 +1,23 @@
+[
+  {
+    "repo": "VoidCrowned/spicetify-gradient-bars",
+    "kind": "push",
+    "ref": "ac7c0c3",
+    "url": "https://github.com/VoidCrowned/spicetify-gradient-bars/commit/ac7c0c3276ca607c1b5727d07fe14950b64dc40d",
+    "at": "2026-11-07T14:44:09Z"
+  },
+  {
+    "repo": "VoidCrowned/spicetify-gradient-connect-bar",
+    "kind": "push",
+    "ref": "fdac5fb",
+    "url": "https://github.com/VoidCrowned/spicetify-gradient-connect-bar/commit/fdac5fb26731f536e3b7604f6e064ba78be90807",
+    "at": "2026-11-06T19:46:32Z"
+  },
+  {
+    "repo": "VoidCrowned/spicetify-gradient-progress-bar",
+    "kind": "push",
+    "ref": "5d3d9f9",
+    "url": "https://github.com/VoidCrowned/spicetify-gradient-progress-bar/commit/5d3d9f9b48ad469b3a2803959aaeca3f41c48d70",
+    "at": "2026-11-06T19:46:28Z"
+  }
+]

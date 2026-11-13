@@ -1,0 +1,4 @@
+node_modules/
+preview/
+.wrangler/
+.dev.vars

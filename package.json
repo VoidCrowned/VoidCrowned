@@ -1,0 +1,16 @@
+{
+  "name": "voidcrowned-profile",
+  "private": true,
+  "type": "module",
+  "description": "Generator for my GitHub profile README terminal",
+  "license": "WTFPL",
+  "scripts": {
+    "build": "node generate.mjs",
+    "check": "node generate.mjs --check",
+    "preview": "node generate.mjs --offline --preview"
+  },
+  "devDependencies": {
+    "fontkit": "^3.0.0",
+    "subset-font": "^2.9.0"
+  }
+}
