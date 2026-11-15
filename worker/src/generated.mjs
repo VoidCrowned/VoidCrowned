@@ -19,8 +19,8 @@ export default {
     ],
     "wordmarkShadow": "#3a2c60",
     "user": "#5d34ea",
-    "at": "#3a2c60",
-    "host": "#c4b5fd",
+    "at": "#3b3764",
+    "host": "#7a6be8",
     "key": "#7a6be8",
     "icon": "#7a6be8",
     "value": "#c4b5fd",
@@ -29,6 +29,8 @@ export default {
     "dim": "#6d6a9c",
     "faint": "#3b3764",
     "cursor": "#c4b5fd",
+    "footer": "#3b3764",
+    "footerIcon": "#5d34ea",
     "progress": [
       "#5d34ea",
       "#7a6be8"

@@ -48,8 +48,8 @@
     ],
     "wordmarkShadow": "shadow",
     "user": "indigo",
-    "at": "shadow",
-    "host": "lavender",
+    "at": "dusk",
+    "host": "iris",
     "key": "iris",
     "icon": "iris",
     "value": "lavender",
@@ -58,6 +58,8 @@
     "dim": "haze",
     "faint": "dusk",
     "cursor": "lavender",
+    "footer": "dusk",
+    "footerIcon": "indigo",
     "progress": [
       "indigo",
       "iris"
@@ -70,12 +72,12 @@
       "haze"
     ]
   },
-  "titlebar": "void@GitHub: ~",
+  "titlebar": "void@github: ~",
   "prompt": {
     "path": "~",
     "command": "glow README.md"
   },
-  "host": "void@GitHub",
+  "host": "void@github",
   "dividerWidth": 28,
   "starDensity": 1,
   "wordmark": [

@@ -149,7 +149,7 @@ function buildItems(font, recent) {
   items.push({
     row: {
       t: 'text',
-      segs: [{ s: '  ' }, { icon: 'spark', c: 'icon' }, { s: ' ' + config.footer, c: 'value' }, { s: ' ' }, { cursor: true, c: 'cursor' }],
+      segs: [{ s: '  ' }, { icon: 'spark', c: 'footerIcon' }, { s: ' ' + config.footer, c: 'footer' }, { s: ' ' }, { cursor: true, c: 'cursor' }],
     },
     name: 'footer',
   });
