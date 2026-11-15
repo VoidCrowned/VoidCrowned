@@ -16,12 +16,16 @@ Useful extras:
 - `node generate.mjs --offline` skips the GitHub API and uses `data/recent.json`.
 - `node generate.mjs --offline --preview` also writes `preview/index.html`, a local page with GitHub's dark styling at 830px and 400px.
 - In a value, `{text}` highlights that part (used for `@6uhrmittag`).
+- Colours: `palette` holds every hex value once, under a name. `theme` says which palette name each part uses. To recolour, change the hex in `palette`; to give a part another colour, change the name in `theme`.
+- Font: `"font"` picks one entry from `fonts` (`gohu` or `jetbrains`).
 - A row with a `link` becomes its own clickable strip. Rows without one are merged into the strip above or below.
 
 ## Why strips
 
 GitHub strips styles and scripts from READMEs, and links inside an SVG shown through `<img>` don't work.
 So each clickable row is its own SVG inside an `<a>`. The images sit in one `<p>` with no whitespace between them and `align="left"`, which makes them float and stack without gaps.
+The strips are 846 units wide, which is the README column on a desktop profile, so GohuFont (a pixel font, native at 14px) sits on whole pixels there. At other widths it is scaled and a little softer.
+`fonts/GohuFontUni14-Latin.ttf` is a cut-down copy of the GohuFont uni-14 Nerd Font file (Latin, punctuation, box drawing), so the repo doesn't carry 2.5 MB of icons.
 Each SVG carries its own subsetted font (only the glyphs it uses). Stars and the `✦` / `♪` icons are drawn shapes, so they don't depend on the font.
 Star positions come from a seeded random generator, so a strip only changes when its content changes.
 

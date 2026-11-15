@@ -2,34 +2,82 @@
   "user": "VoidCrowned",
   "profileUrl": "https://github.com/VoidCrowned",
   "timezone": "Europe/Berlin",
-
-  "font": "jetbrains",
+  "font": "gohu",
   "fonts": {
-    "jetbrains": { "file": "fonts/JetBrainsMono-Regular.ttf", "family": "VC Mono", "size": 15 },
-    "departure": { "file": "fonts/DepartureMono-Regular.otf", "family": "VC Mono", "size": 14 }
+    "gohu": {
+      "file": "fonts/GohuFontUni14-Latin.ttf",
+      "family": "VC Mono",
+      "size": 14
+    },
+    "jetbrains": {
+      "file": "fonts/JetBrainsMono-Regular.ttf",
+      "family": "VC Mono",
+      "size": 15
+    }
   },
-
+  "palette": {
+    "night": "#0b0d1a",
+    "panel": "#0e1022",
+    "outline": "#2a2550",
+    "dusk": "#3b3764",
+    "shadow": "#3a2c60",
+    "indigo": "#5d34ea",
+    "iris": "#7a6be8",
+    "violet": "#a78bfa",
+    "lilac": "#ada4e9",
+    "lavender": "#c4b5fd",
+    "haze": "#6d6a9c",
+    "starBlue": "#6366f1"
+  },
   "theme": {
-    "bg": "#0b0d1a",
-    "border": "#2a2550",
-    "bar": "#0e1022",
-    "key": "#f472b6",
-    "value": "#c4b5fd",
-    "accent": "#f0abfc",
-    "dim": "#6d6a9c",
-    "faint": "#3b3764",
-    "prompt": "#a78bfa",
-    "command": "#e9e4ff",
-    "gradient": ["#8b5cf6", "#c084fc", "#f472b6"],
-    "stars": ["#6366f1", "#8b5cf6", "#a78bfa", "#7c8cf8", "#c084fc"]
+    "bg": "night",
+    "bar": "panel",
+    "border": "outline",
+    "dots": [
+      "iris",
+      "iris",
+      "iris"
+    ],
+    "title": "haze",
+    "promptGlyph": "indigo",
+    "promptPath": "shadow",
+    "command": "lilac",
+    "wordmark": [
+      "indigo",
+      "iris"
+    ],
+    "wordmarkShadow": "shadow",
+    "user": "indigo",
+    "at": "shadow",
+    "host": "lavender",
+    "key": "iris",
+    "icon": "iris",
+    "value": "lavender",
+    "ref": "violet",
+    "artist": "lilac",
+    "dim": "haze",
+    "faint": "dusk",
+    "cursor": "lavender",
+    "progress": [
+      "indigo",
+      "iris"
+    ],
+    "stars": [
+      "starBlue",
+      "indigo",
+      "iris",
+      "violet",
+      "haze"
+    ]
   },
-
-  "titlebar": "void@VC-W11: ~",
-  "prompt": { "path": "~", "command": "cat README.md" },
-  "host": "void@VC-W11",
+  "titlebar": "void@GitHub: ~",
+  "prompt": {
+    "path": "~",
+    "command": "glow README.md"
+  },
+  "host": "void@GitHub",
   "dividerWidth": 28,
   "starDensity": 1,
-
   "wordmark": [
     "██╗   ██╗ ██████╗ ██╗██████╗  ██████╗██████╗  ██████╗ ██╗    ██╗███╗   ██╗███████╗██████╗",
     "██║   ██║██╔═══██╗██║██╔══██╗██╔════╝██╔══██╗██╔═══██╗██║    ██║████╗  ██║██╔════╝██╔══██╗",
@@ -38,26 +86,47 @@
     " ╚████╔╝ ╚██████╔╝██║██████╔╝╚██████╗██║  ██║╚██████╔╝╚███╔███╔╝██║ ╚████║███████╗██████╔╝",
     "  ╚═══╝   ╚═════╝ ╚═╝╚═════╝  ╚═════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ ╚═╝  ╚═══╝╚══════╝╚═════╝"
   ],
-
   "sections": [
     [
-      { "key": "pronouns", "value": "they/them · er/ihm" },
-      { "key": "base", "value": "macha_base, half of macha w/ {@6uhrmittag}", "link": "https://github.com/6uhrmittag" },
-      { "key": "status", "value": "nocturnal. feral. recently fed." }
+      {
+        "key": "pronouns",
+        "value": "they/them · er/ihm"
+      },
+      {
+        "key": "base",
+        "value": "macha_base, half of macha w/ {@6uhrmittag}",
+        "link": "https://github.com/6uhrmittag"
+      },
+      {
+        "key": "status",
+        "value": "nocturnal. feral. recently fed."
+      }
     ],
     [
-      { "key": "web", "value": "voidcrowned.vc", "link": "https://www.voidcrowned.vc" },
-      { "key": "mail", "value": "hi@voidcrowned.vc", "link": "mailto:hi@voidcrowned.vc" },
-      { "key": "discord", "value": "voidcrowned", "link": "https://discord.com/users/367069748548075520" }
+      {
+        "key": "web",
+        "value": "voidcrowned.vc",
+        "link": "https://www.voidcrowned.vc"
+      },
+      {
+        "key": "mail",
+        "value": "hi@voidcrowned.vc",
+        "link": "mailto:hi@voidcrowned.vc"
+      },
+      {
+        "key": "discord",
+        "value": "voidcrowned",
+        "link": "https://discord.com/users/367069748548075520"
+      }
     ]
   ],
-
   "recent": {
     "count": 3,
-    "exclude": ["VoidCrowned/VoidCrowned"],
+    "exclude": [
+      "VoidCrowned/VoidCrowned"
+    ],
     "emptyLine": "nothing. the gremlin rests."
   },
-
   "nowPlaying": {
     "workerUrl": "",
     "discordId": "367069748548075520",
@@ -71,6 +140,5 @@
       "quiet hours. do not tap the glass."
     ]
   },
-
   "footer": "welcome back to the cozy darkness."
 }

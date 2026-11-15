@@ -27,6 +27,16 @@ const NOW = argValue('now') ? new Date(argValue('now')) : new Date();
 
 const config = JSON.parse(fs.readFileSync(at('config.json'), 'utf8'));
 
+// config.theme maps roles to names from config.palette. Resolve them once, so
+// the renderer and the Worker only ever see hex values.
+const colour = (name) => {
+  if (!(name in config.palette)) throw new Error(`config.theme uses "${name}", which is not in config.palette`);
+  return config.palette[name];
+};
+const theme = Object.fromEntries(
+  Object.entries(config.theme).map(([role, v]) => [role, Array.isArray(v) ? v.map(colour) : colour(v)]),
+);
+
 // --- fonts -------------------------------------------------------------------
 
 const missingGlyphs = new Set();
@@ -36,7 +46,8 @@ function loadFont(name) {
   if (!def) throw new Error(`config.font "${name}" is not in config.fonts`);
   const buffer = fs.readFileSync(at(def.file));
   const fk = fontkit.create(buffer);
-  const advance = fk.glyphForCodePoint(0x4d).advanceWidth / fk.unitsPerEm;
+  // cell width rounded to 1/100 px, so a pixel font lands on whole pixels
+  const advance = Math.round((fk.glyphForCodePoint(0x4d).advanceWidth / fk.unitsPerEm) * def.size * 100) / 100 / def.size;
   return { name, family: def.family, size: def.size, advance, buffer, fk };
 }
 
@@ -86,7 +97,7 @@ function valueSegs(value) {
   return value
     .split(/(\{[^}]*\})/)
     .filter(Boolean)
-    .map((part) => (part.startsWith('{') ? { s: part.slice(1, -1), c: 'accent' } : { s: part, c: 'value' }));
+    .map((part) => (part.startsWith('{') ? { s: part.slice(1, -1), c: 'ref' } : { s: part, c: 'value' }));
 }
 
 function buildItems(font, recent) {
@@ -95,12 +106,12 @@ function buildItems(font, recent) {
   const items = [
     { row: { t: 'titlebar', title: config.titlebar } },
     { row: { t: 'gap', h: 12 } },
-    { row: { t: 'text', segs: [{ s: '┌', c: 'prompt' }, { s: ' ' + config.prompt.path, c: 'value' }] } },
-    { row: { t: 'text', segs: [{ s: '└', c: 'prompt' }, { s: ' ' + config.prompt.command, c: 'command' }] } },
+    { row: { t: 'text', segs: [{ s: '┌', c: 'promptGlyph' }, { s: ' ' + config.prompt.path, c: 'promptPath' }] } },
+    { row: { t: 'text', segs: [{ s: '└', c: 'promptGlyph' }, { s: ' ' + config.prompt.command, c: 'command' }] } },
     { row: { t: 'gap', h: 14 } },
     { row: { t: 'wordmark', art: config.wordmark } },
     { row: { t: 'gap', h: 12 } },
-    { row: { t: 'text', segs: [{ s: '  ' }, { s: user, c: 'key' }, { s: '@', c: 'dim' }, { s: host, c: 'value' }] } },
+    { row: { t: 'text', segs: [{ s: '  ' }, { s: user, c: 'user' }, { s: '@', c: 'at' }, { s: host, c: 'host' }] } },
   ];
 
   for (const section of config.sections) {
@@ -125,7 +136,7 @@ function buildItems(font, recent) {
         link: e.url,
         row: kvRow(
           i === 0 ? 'recent' : '',
-          [{ s: e.label.padEnd(repoW), c: 'value' }, { s: e.ref.padEnd(refW), c: 'prompt' }, { s: e.when, c: 'dim' }],
+          [{ s: e.label.padEnd(repoW), c: 'value' }, { s: e.ref.padEnd(refW), c: 'ref' }, { s: e.when, c: 'dim' }],
           { bullet: true },
         ),
       });
@@ -138,7 +149,7 @@ function buildItems(font, recent) {
   items.push({
     row: {
       t: 'text',
-      segs: [{ s: '  ' }, { icon: 'spark', c: 'key' }, { s: ' ' + config.footer, c: 'value' }, { s: ' ' }, { cursor: true, c: 'value' }],
+      segs: [{ s: '  ' }, { icon: 'spark', c: 'icon' }, { s: ' ' + config.footer, c: 'value' }, { s: ' ' }, { cursor: true, c: 'cursor' }],
     },
     name: 'footer',
   });
@@ -178,7 +189,7 @@ async function build(fontName, recent) {
     const b64 = await subset(font, textOf(s.rows));
     s.svg = renderStrip({
       id: s.file,
-      theme: config.theme,
+      theme,
       font: { family: font.family, size: font.size, advance: font.advance, b64 },
       rows: s.rows,
       cap: s.cap,
@@ -205,9 +216,10 @@ function readme(strips, { align = config.readme?.align ?? 'left', prefix = 'asse
 }
 
 async function workerModule(font) {
-  const b64 = await subset(font, workerGlyphs());
+  // Only what the font really has; anything else falls back to a system font.
+  const b64 = await subset(font, [...workerGlyphs()].filter((c) => font.fk.hasGlyphForCodePoint(c.codePointAt(0))).join(''));
   const data = {
-    theme: config.theme,
+    theme,
     font: { family: font.family, size: font.size, advance: font.advance, b64 },
     discordId: config.nowPlaying.discordId,
     idle: config.nowPlaying.idle,
@@ -234,15 +246,12 @@ function expectedFiles(strips, readmeText, workerText) {
 // --- preview -----------------------------------------------------------------
 
 async function writePreview(main, recent) {
-  const otherName = Object.keys(config.fonts).find((f) => f !== main.font.name);
-  const variants = [
-    { label: `${main.font.name} · align="left" (what README.md uses)`, strips: main.strips, prefix: '../assets/', align: 'left' },
-    { label: `${main.font.name} · align="top" (rejected: leaves gaps)`, strips: main.strips, prefix: '../assets/', align: 'top' },
-  ];
-  if (otherName) {
-    const other = await build(otherName, recent);
-    for (const s of other.strips) writeIfChanged(at('preview', otherName, s.file), s.svg);
-    variants.push({ label: `${otherName} · align="left"`, strips: other.strips, prefix: `${otherName}/`, align: 'left' });
+  // One block per font in config.fonts, the configured one first.
+  const variants = [{ label: `${main.font.name} (what README.md uses)`, strips: main.strips, prefix: '../assets/' }];
+  for (const name of Object.keys(config.fonts).filter((f) => f !== main.font.name)) {
+    const other = await build(name, recent);
+    for (const s of other.strips) writeIfChanged(at('preview', name, s.file), s.svg);
+    variants.push({ label: name, strips: other.strips, prefix: `${name}/` });
   }
   // Ask GitHub for its own sanitised HTML, so the preview uses the markup the
   // profile page will really get. Falls back to the raw markup when offline.
@@ -253,12 +262,14 @@ async function writePreview(main, recent) {
       return md;
     }
   };
-  const blocks = variants
-    .map((v) => {
-      const html = render(readme(v.strips, { align: v.align, prefix: v.prefix }));
-      const box = (w) =>
-        `<div class="col" style="width:${w}px"><div class="tag">${w}px</div><article class="markdown-body">${html}</article></div>`;
-      return `<section><h2>${esc(v.label)}</h2><div class="cols">${box(830)}${box(400)}</div></section>`;
+  const widths = (argValue('widths') ?? '846,830,400').split(',').map(Number);
+  const rendered = variants.map((v) => ({ ...v, html: render(readme(v.strips, { prefix: v.prefix })) }));
+  const blocks = widths
+    .map((w) => {
+      const cols = rendered
+        .map((v) => `<div class="col" style="width:${w}px"><div class="tag">${esc(v.label)}</div><article class="markdown-body">${v.html}</article></div>`)
+        .join('');
+      return `<section><h2>${w}px${w === W ? ' (desktop profile column, 1:1)' : ''}</h2><div class="cols">${cols}</div></section>`;
     })
     .join('\n');
   const html = `<!doctype html>
