@@ -1,7 +1,6 @@
 {
   "user": "VoidCrowned",
   "profileUrl": "https://github.com/VoidCrowned",
-  "timezone": "Europe/Berlin",
   "font": "jetbrains",
   "fonts": {
     "gohu": {
@@ -100,7 +99,7 @@
     0.75,
     1
   ],
-  "nameplate": "current",
+  "nameplate": "G",
   "nameplates": {
     "current": {
       "name": "ansi_shadow",
@@ -273,5 +272,5 @@
     ]
   },
   "footer": "welcome back to the cozy darkness.",
-  "cursorOpacity": 1
+  "cursorOpacity": 0.55
 }

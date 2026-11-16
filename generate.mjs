@@ -131,7 +131,7 @@ function buildItems(font, recent, plateId) {
     const shown = recent.map((e) => ({
       ...e,
       label: truncate(displayRepo(e.repo, config.user), maxCols(font) - VALUE_COL - 24),
-      when: bucket(e.at, NOW, config.timezone),
+      when: bucket(e.at, NOW),
     }));
     const repoW = Math.max(...shown.map((e) => cells(e.label))) + 2;
     const refW = Math.max(...shown.map((e) => cells(e.ref))) + 2;

@@ -36,7 +36,7 @@ Star positions come from a seeded random generator, so a strip only changes when
 
 `lib/recent.mjs` reads my public events: pushes link to the head commit, merged pull requests link to the PR. It keeps the newest entry per repo and shows three.
 The events API only reaches back about 90 days, so the last known list lives in `data/recent.json` and stays on screen until something newer arrives.
-Times are coarse on purpose (`today`, `yesterday`, `this week`, `2w ago`): the text changes at most once a day, so the hourly Action doesn't commit every hour.
+Times are coarse on purpose (`today` for anything under 24 hours, then `3 d ago`, `2 w ago`, `4 m ago`, `1 y ago`): the text changes at most once a day, so the hourly Action doesn't commit every hour.
 
 ## The Action
 
