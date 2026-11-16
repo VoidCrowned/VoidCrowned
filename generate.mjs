@@ -29,12 +29,15 @@ const config = JSON.parse(fs.readFileSync(at('config.json'), 'utf8'));
 
 // config.theme maps roles to names from config.palette. Resolve them once, so
 // the renderer and the Worker only ever see hex values.
-const colour = (name) => {
-  if (!(name in config.palette)) throw new Error(`config.theme uses "${name}", which is not in config.palette`);
-  return config.palette[name];
+// A theme value is a palette name, or the name of another theme role (then both
+// roles always share one colour, e.g. "cursor": "footer").
+const colour = (name, seen = []) => {
+  if (name in config.palette) return config.palette[name];
+  if (name in config.theme && !seen.includes(name) && typeof config.theme[name] === 'string') return colour(config.theme[name], [...seen, name]);
+  throw new Error(`config.theme uses "${name}", which is neither in config.palette nor another theme role`);
 };
 const theme = Object.fromEntries(
-  Object.entries(config.theme).map(([role, v]) => [role, Array.isArray(v) ? v.map(colour) : colour(v)]),
+  Object.entries(config.theme).map(([role, v]) => [role, Array.isArray(v) ? v.map((x) => colour(x)) : colour(v)]),
 );
 
 // --- fonts -------------------------------------------------------------------

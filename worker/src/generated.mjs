@@ -28,7 +28,7 @@ export default {
     "artist": "#ada4e9",
     "dim": "#6d6a9c",
     "faint": "#3b3764",
-    "cursor": "#bbb1fe",
+    "cursor": "#6d6a9c",
     "footer": "#6d6a9c",
     "when": "#3b3764",
     "footerIcon": "#5d34ea",
@@ -36,12 +36,20 @@ export default {
       "#5d34ea",
       "#7a6be8"
     ],
-    "stars": [
-      "#6366f1",
+    "starsSparkle": [
+      "#3a2c60",
+      "#7464b0",
       "#5d34ea",
-      "#7a6be8",
-      "#a78bfa",
-      "#6d6a9c"
+      "#7a6be8"
+    ],
+    "starsDust": [
+      "#df6fdc",
+      "#b631d2",
+      "#65229c",
+      "#3a2c60",
+      "#7464b0",
+      "#5d34ea",
+      "#7a6be8"
     ]
   },
   "font": {

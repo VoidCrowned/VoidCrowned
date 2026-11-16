@@ -30,7 +30,10 @@
     "dotMiddle": "#6b4fe9",
     "dotRight": "#7a6ae8",
     "haze": "#6d6a9c",
-    "starBlue": "#6366f1"
+    "mauve": "#7464b0",
+    "orchid": "#df6fdc",
+    "magenta": "#b631d2",
+    "plum": "#65229c"
   },
   "theme": {
     "bg": "night",
@@ -60,7 +63,7 @@
     "artist": "lilac",
     "dim": "haze",
     "faint": "dusk",
-    "cursor": "lavender",
+    "cursor": "footer",
     "footer": "haze",
     "when": "dusk",
     "footerIcon": "indigo",
@@ -68,12 +71,20 @@
       "indigo",
       "iris"
     ],
-    "stars": [
-      "starBlue",
+    "starsSparkle": [
+      "shadow",
+      "mauve",
       "indigo",
-      "iris",
-      "violet",
-      "haze"
+      "iris"
+    ],
+    "starsDust": [
+      "orchid",
+      "magenta",
+      "plum",
+      "shadow",
+      "mauve",
+      "indigo",
+      "iris"
     ]
   },
   "titlebar": "void@github: ~",
