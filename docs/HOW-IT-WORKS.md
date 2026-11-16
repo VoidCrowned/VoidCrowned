@@ -17,6 +17,9 @@ Useful extras:
 - `node generate.mjs --offline --preview` also writes `preview/index.html`, a local page with GitHub's dark styling at 830px and 400px.
 - In a value, `{text}` highlights that part (used for `@6uhrmittag`).
 - Colours: `palette` holds every hex value once, under a name. `theme` says which palette name each part uses. To recolour, change the hex in `palette`; to give a part another colour, change the name in `theme`.
+- Nameplate: `"nameplate"` picks one entry from `nameplates` (the big name under the prompt). Block and box-drawing characters are drawn as shapes; `"type": "text"` plates use the font. `"shadow": [x, y]` adds a drop shadow.
+- A theme entry may name another theme entry instead of a palette colour (`"cursor": "footer"`), then both always share one colour.
+- `cursorOpacity` dims the cursor block (1 = same strength as the text colour).
 - Font: `"font"` picks one entry from `fonts` (`gohu` or `jetbrains`).
 - A row with a `link` becomes its own clickable strip. Rows without one are merged into the strip above or below.
 

@@ -3,7 +3,7 @@ export default {
   "theme": {
     "bg": "#0b0d1a",
     "bar": "#0e1022",
-    "border": "#2a2550",
+    "border": "#3b3764",
     "dots": [
       "#5d35ea",
       "#6b4fe9",
@@ -24,7 +24,7 @@ export default {
     "key": "#7a6be8",
     "icon": "#7a6be8",
     "value": "#bbb1fe",
-    "ref": "#a78bfa",
+    "ref": "#7a6be8",
     "artist": "#ada4e9",
     "dim": "#6d6a9c",
     "faint": "#3b3764",
@@ -50,7 +50,9 @@ export default {
       "#7464b0",
       "#5d34ea",
       "#7a6be8"
-    ]
+    ],
+    "commandArg": "#7a6be8",
+    "nameplateSpark": "#5d34ea"
   },
   "font": {
     "family": "VC Mono",

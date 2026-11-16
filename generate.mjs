@@ -103,16 +103,18 @@ function valueSegs(value) {
     .map((part) => (part.startsWith('{') ? { s: part.slice(1, -1), c: 'ref' } : { s: part, c: 'value' }));
 }
 
-function buildItems(font, recent) {
+function buildItems(font, recent, plateId) {
+  const plate = config.nameplates[plateId];
+  if (!plate) throw new Error(`config.nameplate "${plateId}" is not in config.nameplates`);
   const rule = () => ({ row: { t: 'rule', w: config.dividerWidth } });
   const [user, host] = config.host.split('@');
   const items = [
     { row: { t: 'titlebar', title: config.titlebar } },
     { row: { t: 'gap', h: 12 } },
     { row: { t: 'text', segs: [{ icon: 'bracketTop', c: 'promptGlyph' }, { s: ' ' + config.prompt.path, c: 'promptPath' }] } },
-    { row: { t: 'text', segs: [{ icon: 'bracketBottom', c: 'promptGlyph' }, { s: ' ' + config.prompt.command, c: 'command' }] } },
+    { row: { t: 'text', segs: [{ icon: 'bracketBottom', c: 'promptGlyph' }, { s: ' ' + config.prompt.command, c: 'command' }, ...(config.prompt.argument ? [{ s: ' ' + config.prompt.argument, c: 'commandArg' }] : [])] } },
     { row: { t: 'gap', h: 14 } },
-    { row: { t: 'wordmark', art: config.wordmark } },
+    { row: { t: 'wordmark', plate } },
     { row: { t: 'gap', h: 12 } },
     { row: { t: 'text', segs: [{ s: '  ' }, { s: user, c: 'user' }, { s: '@', c: 'at' }, { s: host, c: 'host' }] } },
   ];
@@ -185,9 +187,9 @@ function groupStrips(items) {
   return strips;
 }
 
-async function build(fontName, recent) {
+async function build(fontName, recent, { plateId = config.nameplate, cursorOpacity = config.cursorOpacity } = {}) {
   const font = loadFont(fontName);
-  const strips = groupStrips(buildItems(font, recent));
+  const strips = groupStrips(buildItems(font, recent, plateId));
   for (const s of strips) {
     const b64 = await subset(font, textOf(s.rows));
     s.svg = renderStrip({
@@ -198,6 +200,7 @@ async function build(fontName, recent) {
       cap: s.cap,
       stars: config.starDensity,
       starOpacity: config.starOpacity,
+      cursorOpacity,
       title: s.alt,
     });
   }
@@ -251,13 +254,6 @@ function expectedFiles(strips, readmeText, workerText) {
 // --- preview -----------------------------------------------------------------
 
 async function writePreview(main, recent) {
-  // One block per font in config.fonts, the configured one first.
-  const variants = [{ label: `${main.font.name} (what README.md uses)`, strips: main.strips, prefix: '../assets/' }];
-  for (const name of Object.keys(config.fonts).filter((f) => f !== main.font.name)) {
-    const other = await build(name, recent);
-    for (const s of other.strips) writeIfChanged(at('preview', name, s.file), s.svg);
-    variants.push({ label: name, strips: other.strips, prefix: `${name}/` });
-  }
   // Ask GitHub for its own sanitised HTML, so the preview uses the markup the
   // profile page will really get. Falls back to the raw markup when offline.
   const render = (md) => {
@@ -267,16 +263,30 @@ async function writePreview(main, recent) {
       return md;
     }
   };
-  const widths = (argValue('widths') ?? '846,830,400').split(',').map(Number);
-  const rendered = variants.map((v) => ({ ...v, html: render(readme(v.strips, { prefix: v.prefix })) }));
-  const blocks = widths
-    .map((w) => {
-      const cols = rendered
-        .map((v) => `<div class="col" style="width:${w}px"><div class="tag">${esc(v.label)}</div><article class="markdown-body">${v.html}</article></div>`)
-        .join('');
-      return `<section><h2>${w}px${w === W ? ' (desktop profile column, 1:1)' : ''}</h2><div class="cols">${cols}</div></section>`;
-    })
-    .join('\n');
+  const column = (label, html, w) =>
+    `<div class="col" style="width:${w}px"><div class="tag">${esc(label)}</div><article class="markdown-body">${html}</article></div>`;
+  const variant = async (dir, opts) => {
+    const v = await build(config.font, recent, opts);
+    for (const s of v.strips) writeIfChanged(at('preview', dir, s.file), s.svg);
+    return { html: render(readme(v.strips, { prefix: `${dir}/` })), strips: v.strips };
+  };
+
+  let blocks = '';
+  // 1. every nameplate, full terminal, stacked
+  for (const id of Object.keys(config.nameplates)) {
+    const html = id === config.nameplate ? render(readme(main.strips, { prefix: '../assets/' })) : (await variant(`plate-${id}`, { plateId: id })).html;
+    const p = config.nameplates[id];
+    const label = `${id}${p.name ? ' · ' + p.name : ''}${id === config.nameplate ? ' (what README.md uses)' : ''} · shadow: ${p.shadow || id === 'current' ? 'yes' : 'no'}`;
+    blocks += `<section><h2>Nameplate ${esc(id)}</h2><div class="cols">${column(label, html, W)}</div></section>\n`;
+  }
+  // 2. cursor at full strength and dimmed
+  const dim = config.cursorDimPreview ?? 0.55;
+  blocks += `<section><h2>Cursor</h2><div class="cols">${column('cursor at full opacity (current)', render(readme(main.strips.slice(-1), { prefix: '../assets/' })), W)}${column(`cursor dimmed to ${dim}`, render(readme((await variant('cursor-dim', { cursorOpacity: dim })).strips.slice(-1), { prefix: 'cursor-dim/' })), W)}</div></section>\n`;
+  // 3. the configured version at other widths
+  const mainHtml = render(readme(main.strips, { prefix: '../assets/' }));
+  for (const w of (argValue('widths') ?? '830,400').split(',').map(Number)) {
+    blocks += `<section><h2>${w}px</h2><div class="cols">${column(config.nameplate, mainHtml, w)}</div></section>\n`;
+  }
   const html = `<!doctype html>
 <html lang="en-GB" data-color-mode="dark" data-dark-theme="dark">
 <meta charset="utf-8">
