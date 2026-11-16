@@ -2,7 +2,7 @@
   "user": "VoidCrowned",
   "profileUrl": "https://github.com/VoidCrowned",
   "timezone": "Europe/Berlin",
-  "font": "gohu",
+  "font": "jetbrains",
   "fonts": {
     "gohu": {
       "file": "fonts/GohuFontUni14-Latin.ttf",
@@ -95,6 +95,7 @@
   "host": "void@github",
   "dividerWidth": 28,
   "starDensity": 1,
+  "starOpacity": [0.75, 1],
   "wordmark": [
     "██╗   ██╗ ██████╗ ██╗██████╗  ██████╗██████╗  ██████╗ ██╗    ██╗███╗   ██╗███████╗██████╗",
     "██║   ██║██╔═══██╗██║██╔══██╗██╔════╝██╔══██╗██╔═══██╗██║    ██║████╗  ██║██╔════╝██╔══██╗",

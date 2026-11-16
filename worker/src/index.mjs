@@ -37,6 +37,7 @@ export default {
       font: data.font,
       rows,
       stars: data.stars,
+      starOpacity: data.starOpacity,
       title: track ? `now playing: ${track.song} — ${track.artist}` : `now playing: ${idle}`,
     });
     return new Response(svg, {
