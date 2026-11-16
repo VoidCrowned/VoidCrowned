@@ -130,7 +130,7 @@
     "emptyLine": "nothing. the gremlin rests."
   },
   "nowPlaying": {
-    "workerUrl": "",
+    "workerUrl": "https://voidcrowned-now.voidcrowned.workers.dev/",
     "discordId": "367069748548075520",
     "link": "https://discord.com/users/367069748548075520",
     "placeholder": "silence. suspicious.",
