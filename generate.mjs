@@ -106,8 +106,8 @@ function buildItems(font, recent) {
   const items = [
     { row: { t: 'titlebar', title: config.titlebar } },
     { row: { t: 'gap', h: 12 } },
-    { row: { t: 'text', segs: [{ s: '┌', c: 'promptGlyph' }, { s: ' ' + config.prompt.path, c: 'promptPath' }] } },
-    { row: { t: 'text', segs: [{ s: '└', c: 'promptGlyph' }, { s: ' ' + config.prompt.command, c: 'command' }] } },
+    { row: { t: 'text', segs: [{ icon: 'bracketTop', c: 'promptGlyph' }, { s: ' ' + config.prompt.path, c: 'promptPath' }] } },
+    { row: { t: 'text', segs: [{ icon: 'bracketBottom', c: 'promptGlyph' }, { s: ' ' + config.prompt.command, c: 'command' }] } },
     { row: { t: 'gap', h: 14 } },
     { row: { t: 'wordmark', art: config.wordmark } },
     { row: { t: 'gap', h: 12 } },
@@ -136,7 +136,7 @@ function buildItems(font, recent) {
         link: e.url,
         row: kvRow(
           i === 0 ? 'recent' : '',
-          [{ s: e.label.padEnd(repoW), c: 'value' }, { s: e.ref.padEnd(refW), c: 'ref' }, { s: e.when, c: 'dim' }],
+          [{ s: e.label.padEnd(repoW), c: 'value' }, { s: e.ref.padEnd(refW), c: 'ref' }, { s: e.when, c: 'when' }],
           { bullet: true },
         ),
       });

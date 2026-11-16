@@ -5,9 +5,9 @@ export default {
     "bar": "#0e1022",
     "border": "#2a2550",
     "dots": [
-      "#7a6be8",
-      "#7a6be8",
-      "#7a6be8"
+      "#5d35ea",
+      "#6b4fe9",
+      "#7a6ae8"
     ],
     "title": "#6d6a9c",
     "promptGlyph": "#5d34ea",
@@ -23,13 +23,14 @@ export default {
     "host": "#7a6be8",
     "key": "#7a6be8",
     "icon": "#7a6be8",
-    "value": "#c4b5fd",
+    "value": "#bbb1fe",
     "ref": "#a78bfa",
     "artist": "#ada4e9",
     "dim": "#6d6a9c",
     "faint": "#3b3764",
-    "cursor": "#c4b5fd",
-    "footer": "#3b3764",
+    "cursor": "#bbb1fe",
+    "footer": "#6d6a9c",
+    "when": "#3b3764",
     "footerIcon": "#5d34ea",
     "progress": [
       "#5d34ea",

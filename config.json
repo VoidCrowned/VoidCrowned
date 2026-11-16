@@ -25,7 +25,10 @@
     "iris": "#7a6be8",
     "violet": "#a78bfa",
     "lilac": "#ada4e9",
-    "lavender": "#c4b5fd",
+    "lavender": "#bbb1fe",
+    "dotLeft": "#5d35ea",
+    "dotMiddle": "#6b4fe9",
+    "dotRight": "#7a6ae8",
     "haze": "#6d6a9c",
     "starBlue": "#6366f1"
   },
@@ -34,9 +37,9 @@
     "bar": "panel",
     "border": "outline",
     "dots": [
-      "iris",
-      "iris",
-      "iris"
+      "dotLeft",
+      "dotMiddle",
+      "dotRight"
     ],
     "title": "haze",
     "promptGlyph": "indigo",
@@ -58,7 +61,8 @@
     "dim": "haze",
     "faint": "dusk",
     "cursor": "lavender",
-    "footer": "dusk",
+    "footer": "haze",
+    "when": "dusk",
     "footerIcon": "indigo",
     "progress": [
       "indigo",
