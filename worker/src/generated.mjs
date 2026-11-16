@@ -3,7 +3,7 @@ export default {
   "theme": {
     "bg": "#0b0d1a",
     "bar": "#0e1022",
-    "border": "#3b3764",
+    "border": "#2a2550",
     "dots": [
       "#5d35ea",
       "#6b4fe9",

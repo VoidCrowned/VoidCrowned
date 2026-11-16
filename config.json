@@ -30,12 +30,13 @@
     "mauve": "#7464b0",
     "orchid": "#df6fdc",
     "magenta": "#b631d2",
-    "plum": "#65229c"
+    "plum": "#65229c",
+    "outline": "#2a2550"
   },
   "theme": {
     "bg": "night",
     "bar": "panel",
-    "border": "when",
+    "border": "outline",
     "dots": [
       "dotLeft",
       "dotMiddle",
