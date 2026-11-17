@@ -1,5 +1,12 @@
 [
   {
+    "repo": "VoidCrowned/ls_colours_config",
+    "kind": "push",
+    "ref": "a64e6c1",
+    "url": "https://github.com/VoidCrowned/ls_colours_config/commit/a64e6c1f412def437c15485b64eaf3e980610ef6",
+    "at": "2026-11-16T23:11:38Z"
+  },
+  {
     "repo": "VoidCrowned/spicetify-gradient-bars",
     "kind": "push",
     "ref": "ac7c0c3",
@@ -12,12 +19,5 @@
     "ref": "fdac5fb",
     "url": "https://github.com/VoidCrowned/spicetify-gradient-connect-bar/commit/fdac5fb26731f536e3b7604f6e064ba78be90807",
     "at": "2026-11-06T19:46:32Z"
-  },
-  {
-    "repo": "VoidCrowned/spicetify-gradient-progress-bar",
-    "kind": "push",
-    "ref": "5d3d9f9",
-    "url": "https://github.com/VoidCrowned/spicetify-gradient-progress-bar/commit/5d3d9f9b48ad469b3a2803959aaeca3f41c48d70",
-    "at": "2026-11-06T19:46:28Z"
   }
 ]
