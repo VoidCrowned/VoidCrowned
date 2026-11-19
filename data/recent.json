@@ -1,23 +1,23 @@
 [
   {
+    "repo": "VoidCrowned/cc-live-theme-editor",
+    "kind": "push",
+    "ref": "fd217f3",
+    "url": "https://github.com/VoidCrowned/cc-live-theme-editor/commit/fd217f36d9d512160d4ab83dd42124551b232b77",
+    "at": "2026-11-18T17:40:15Z"
+  },
+  {
+    "repo": "VoidCrowned/ls-colours-config",
+    "kind": "push",
+    "ref": "cf68a89",
+    "url": "https://github.com/VoidCrowned/ls-colours-config/commit/cf68a895070fd1c5c673ff0c677701e5bac0db72",
+    "at": "2026-11-18T16:43:38Z"
+  },
+  {
     "repo": "VoidCrowned/ls_colours_config",
     "kind": "push",
     "ref": "ef52fca",
     "url": "https://github.com/VoidCrowned/ls_colours_config/commit/ef52fca2ef0f306557df79d07fb0cfa4ad1d1f29",
     "at": "2026-11-17T14:33:39Z"
-  },
-  {
-    "repo": "VoidCrowned/spicetify-gradient-bars",
-    "kind": "push",
-    "ref": "ac7c0c3",
-    "url": "https://github.com/VoidCrowned/spicetify-gradient-bars/commit/ac7c0c3276ca607c1b5727d07fe14950b64dc40d",
-    "at": "2026-11-07T14:44:09Z"
-  },
-  {
-    "repo": "VoidCrowned/spicetify-gradient-connect-bar",
-    "kind": "push",
-    "ref": "fdac5fb",
-    "url": "https://github.com/VoidCrowned/spicetify-gradient-connect-bar/commit/fdac5fb26731f536e3b7604f6e064ba78be90807",
-    "at": "2026-11-06T19:46:32Z"
   }
 ]
