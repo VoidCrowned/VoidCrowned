@@ -2,16 +2,16 @@
   {
     "repo": "VoidCrowned/spicetify-pantry",
     "kind": "pr",
-    "ref": "#44",
-    "url": "https://github.com/VoidCrowned/spicetify-pantry/pull/44",
-    "at": "2026-11-26T20:28:57Z"
+    "ref": "#45",
+    "url": "https://github.com/VoidCrowned/spicetify-pantry/pull/45",
+    "at": "2026-11-27T07:43:15Z"
   },
   {
     "repo": "VoidCrowned/job-search-tool",
-    "kind": "pr",
-    "ref": "#102",
-    "url": "https://github.com/VoidCrowned/job-search-tool/pull/102",
-    "at": "2026-11-25T22:56:00Z"
+    "kind": "push",
+    "ref": "4b03f9e",
+    "url": "https://github.com/VoidCrowned/job-search-tool/commit/4b03f9e2ce49e01a447097d77563d2e306017553",
+    "at": "2026-11-25T22:56:02Z"
   },
   {
     "repo": "VoidCrowned/ls-colours-config",
